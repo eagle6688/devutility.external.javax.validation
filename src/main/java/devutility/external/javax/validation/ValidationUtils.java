@@ -18,12 +18,33 @@ public class ValidationUtils {
 
 	/**
 	 * Validate model.
-	 * @param model
+	 * @param model: Model object.
 	 * @return ValidationResult
 	 */
 	public static <T> ValidationResult validate(T model) {
 		ValidationResult result = new ValidationResult();
 		Set<ConstraintViolation<T>> set = validator.validate(model, Default.class);
+
+		if (CollectionUtils.isNotEmpty(set)) {
+			result.setFailed(true);
+
+			for (ConstraintViolation<T> cv : set) {
+				result.put(cv.getPropertyPath().toString(), cv.getMessage());
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Validate model.
+	 * @param model: Model object.
+	 * @param clazz: Class object.
+	 * @return ValidationResult
+	 */
+	public static <T> ValidationResult validate(T model, Class<T> clazz) {
+		ValidationResult result = new ValidationResult();
+		Set<ConstraintViolation<T>> set = validator.validate(model, clazz);
 
 		if (CollectionUtils.isNotEmpty(set)) {
 			result.setFailed(true);
