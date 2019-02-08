@@ -8,21 +8,26 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import devutility.external.javax.validation.annotation.impl.PatternIfNotNullValidatorImpl;
+import devutility.external.javax.validation.annotation.impl.SizeIfNotNullValidatorImpl;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.FIELD })
-@Constraint(validatedBy = { PatternIfNotNullValidatorImpl.class })
-public @interface PatternIfNotNull {
+@Constraint(validatedBy = { SizeIfNotNullValidatorImpl.class })
+public @interface SizeIfNotNull {
 	/**
-	 * @return the regular expression to match
+	 * @return size the element must be higher or equal to
 	 */
-	String regexp();
+	int min() default 0;
+
+	/**
+	 * @return size the element must be lower or equal to
+	 */
+	int max() default Integer.MAX_VALUE;
 
 	/**
 	 * @return the error message template
 	 */
-	String message() default "{devutility.external.javax.validation.annotation.PatternIfNotNull.message}";
+	String message() default "{devutility.external.javax.validation.annotation.SizeIfNotNull.message}";
 
 	/**
 	 * groups for constraint annotation.
