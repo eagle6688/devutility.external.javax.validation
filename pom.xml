@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.eagle6688</groupId>
 	<artifactId>devutility.external.javax.validation</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 	<name>devutility.external.javax.validation</name>
 	<description>Some utilities for javax.validation Version 2.*</description>

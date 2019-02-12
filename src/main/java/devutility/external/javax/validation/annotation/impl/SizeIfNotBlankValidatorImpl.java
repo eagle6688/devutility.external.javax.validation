@@ -3,21 +3,22 @@ package devutility.external.javax.validation.annotation.impl;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import devutility.external.javax.validation.annotation.SizeIfNotNull;
+import devutility.external.javax.validation.annotation.SizeIfNotBlank;
+import devutility.internal.lang.StringUtils;
 
-public class SizeIfNotNullValidatorImpl implements ConstraintValidator<SizeIfNotNull, String> {
+public class SizeIfNotBlankValidatorImpl implements ConstraintValidator<SizeIfNotBlank, String> {
 	private int min;
 	private int max;
 
 	@Override
-	public void initialize(SizeIfNotNull constraintAnnotation) {
+	public void initialize(SizeIfNotBlank constraintAnnotation) {
 		this.min = constraintAnnotation.min();
 		this.max = constraintAnnotation.max();
 	}
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (value == null) {
+		if (StringUtils.isNullOrEmpty(value)) {
 			return true;
 		}
 

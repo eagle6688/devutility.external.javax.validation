@@ -8,12 +8,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import devutility.external.javax.validation.annotation.impl.PatternIfNotNullValidatorImpl;
+import devutility.external.javax.validation.annotation.impl.PatternIfNotBlankValidatorImpl;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.FIELD })
-@Constraint(validatedBy = { PatternIfNotNullValidatorImpl.class })
-public @interface PatternIfNotNull {
+@Constraint(validatedBy = { PatternIfNotBlankValidatorImpl.class })
+public @interface PatternIfNotBlank {
 	/**
 	 * @return the regular expression to match
 	 */

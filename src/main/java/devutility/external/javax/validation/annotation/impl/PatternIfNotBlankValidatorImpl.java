@@ -6,20 +6,20 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import devutility.external.javax.validation.annotation.PatternIfNotNull;
+import devutility.external.javax.validation.annotation.PatternIfNotBlank;
 import devutility.internal.lang.StringUtils;
 
-public class PatternIfNotNullValidatorImpl implements ConstraintValidator<PatternIfNotNull, String> {
+public class PatternIfNotBlankValidatorImpl implements ConstraintValidator<PatternIfNotBlank, String> {
 	private String regexp;
 
 	@Override
-	public void initialize(PatternIfNotNull constraintAnnotation) {
+	public void initialize(PatternIfNotBlank constraintAnnotation) {
 		this.regexp = constraintAnnotation.regexp();
 	}
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (value == null) {
+		if (StringUtils.isNullOrEmpty(value)) {
 			return true;
 		}
 

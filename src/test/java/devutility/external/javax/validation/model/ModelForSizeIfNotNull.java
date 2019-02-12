@@ -1,15 +1,15 @@
 package devutility.external.javax.validation.model;
 
-import devutility.external.javax.validation.annotation.SizeIfNotNull;
+import devutility.external.javax.validation.annotation.SizeIfNotBlank;
 
 public class ModelForSizeIfNotNull {
-	@SizeIfNotNull(min = 6, max = 10, message = "请输入6-10位密码！")
+	@SizeIfNotBlank(min = 6, max = 10, message = "请输入6-10位密码！")
 	private String cellphone1;
 
-	@SizeIfNotNull(min = 6, message = "请输入6-位以上密码！")
+	@SizeIfNotBlank(min = 6, message = "请输入6-位以上密码！")
 	private String cellphone2;
 
-	@SizeIfNotNull(max = 10, message = "请输入少于10位密码！")
+	@SizeIfNotBlank(max = 10, message = "请输入少于10位密码！")
 	private String cellphone3;
 
 	public String getCellphone1() {

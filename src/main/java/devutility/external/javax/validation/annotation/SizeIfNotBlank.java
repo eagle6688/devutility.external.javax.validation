@@ -8,12 +8,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import devutility.external.javax.validation.annotation.impl.SizeIfNotNullValidatorImpl;
+import devutility.external.javax.validation.annotation.impl.SizeIfNotBlankValidatorImpl;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.FIELD })
-@Constraint(validatedBy = { SizeIfNotNullValidatorImpl.class })
-public @interface SizeIfNotNull {
+@Constraint(validatedBy = { SizeIfNotBlankValidatorImpl.class })
+public @interface SizeIfNotBlank {
 	/**
 	 * @return size the element must be higher or equal to
 	 */
