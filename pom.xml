@@ -73,7 +73,7 @@
 		</dependency>
 		<!-- devutility end -->
 
-		<!-- For test -->
+		<!-- Test -->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -92,7 +92,7 @@
 			<version>3.0.0</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- For test end -->
+		<!-- Test -->
 	</dependencies>
 	<build>
 		<plugins>
