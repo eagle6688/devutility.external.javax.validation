@@ -8,9 +8,20 @@
 	<artifactId>devutility.external.javax.validation</artifactId>
 	<version>1.0.5</version>
 	<packaging>jar</packaging>
-	<description>Some utilities for javax.validation</description>
 	<url>https://github.com/eagle6688/devutility.external.javax.validation</url>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>Some utilities for javax.validation</description>
 
+	<!-- scm -->
+	<scm>
+		<connection>scm:git:https://github.com/eagle6688/devutility.external.javax.validation.git</connection>
+		<developerConnection>scm:git:https://github.com/eagle6688/devutility.external.javax.validation.git</developerConnection>
+		<url>https://github.com/eagle6688/devutility.external.javax.validation</url>
+		<tag>v${project.version}</tag>
+	</scm>
+	<!-- scm end -->
+
+	<!-- dependencies -->
 	<dependencies>
 		<dependency>
 			<groupId>com.github.eagle6688</groupId>
@@ -44,4 +55,5 @@
 		</dependency>
 		<!-- Test -->
 	</dependencies>
+	<!-- dependencies end -->
 </project>
