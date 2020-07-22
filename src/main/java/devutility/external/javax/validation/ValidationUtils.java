@@ -10,6 +10,13 @@ import javax.validation.groups.Default;
 import devutility.external.javax.validation.model.ValidationResult;
 import devutility.internal.util.CollectionUtils;
 
+/**
+ * 
+ * ValidationUtils
+ * 
+ * @author: Aldwin Su
+ * @creation: 2018-11-19 23:28:10
+ */
 public class ValidationUtils {
 	/**
 	 * Default validator factory.
@@ -17,19 +24,19 @@ public class ValidationUtils {
 	private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	/**
-	 * Validate model.
-	 * @param model: Model object.
+	 * Validate Java bean.
+	 * @param bean Java bean object.
 	 * @return ValidationResult
 	 */
-	public static <T> ValidationResult validate(T model) {
+	public static <T> ValidationResult validate(T bean) {
 		ValidationResult result = new ValidationResult();
-		Set<ConstraintViolation<T>> set = validator.validate(model, Default.class);
+		Set<ConstraintViolation<T>> violations = validator.validate(bean, Default.class);
 
-		if (CollectionUtils.isNotEmpty(set)) {
+		if (CollectionUtils.isNotEmpty(violations)) {
 			result.setFailed(true);
 
-			for (ConstraintViolation<T> cv : set) {
-				result.put(cv.getPropertyPath().toString(), cv.getMessage());
+			for (ConstraintViolation<T> violation : violations) {
+				result.put(violation.getPropertyPath().toString(), violation.getMessage());
 			}
 		}
 
