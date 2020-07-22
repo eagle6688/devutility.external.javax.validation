@@ -45,6 +45,15 @@ public class ValidationUtils {
 		return ValidationResult.build(violations);
 	}
 
+	/**
+	 * Validates all constraints placed on the parameters of the given method.
+	 * @param <T> the type hosting the method to validate
+	 * @param object the object on which the method to validate is invoked
+	 * @param method the method for which the parameter constraints is validated
+	 * @param parameterValues the values provided by the caller for the given method's parameters
+	 * @param groups the group or list of groups targeted for validation
+	 * @return ValidationResult
+	 */
 	public static <T> ValidationResult validateParameters(T object, Method method, Object[] parameterValues, Class<?>... groups) {
 		Set<ConstraintViolation<T>> violations = executableValidator.validateParameters(object, method, parameterValues, groups);
 		return ValidationResult.build(violations);
