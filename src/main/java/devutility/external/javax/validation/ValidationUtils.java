@@ -1,14 +1,16 @@
 package devutility.external.javax.validation;
 
+import java.lang.reflect.Method;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.executable.ExecutableValidator;
 import javax.validation.groups.Default;
 
 import devutility.external.javax.validation.model.ValidationResult;
-import devutility.internal.util.CollectionUtils;
 
 /**
  * 
@@ -19,9 +21,19 @@ import devutility.internal.util.CollectionUtils;
  */
 public class ValidationUtils {
 	/**
-	 * Default validator factory.
+	 * Default ValidatorFactory object.
 	 */
-	private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+	private static final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+
+	/**
+	 * Default Validator object.
+	 */
+	private static final Validator validator = validatorFactory.getValidator();
+
+	/**
+	 * Default ExecutableValidator object
+	 */
+	private static final ExecutableValidator executableValidator = validator.forExecutables();
 
 	/**
 	 * Validate Java bean.
@@ -29,17 +41,12 @@ public class ValidationUtils {
 	 * @return ValidationResult
 	 */
 	public static <T> ValidationResult validate(T bean) {
-		ValidationResult result = new ValidationResult();
 		Set<ConstraintViolation<T>> violations = validator.validate(bean, Default.class);
+		return ValidationResult.build(violations);
+	}
 
-		if (CollectionUtils.isNotEmpty(violations)) {
-			result.setFailed(true);
-
-			for (ConstraintViolation<T> violation : violations) {
-				result.put(violation.getPropertyPath().toString(), violation.getMessage());
-			}
-		}
-
-		return result;
+	public static <T> ValidationResult validateParameters(T object, Method method, Object[] parameterValues, Class<?>... groups) {
+		Set<ConstraintViolation<T>> violations = executableValidator.validateParameters(object, method, parameterValues, groups);
+		return ValidationResult.build(violations);
 	}
 }
