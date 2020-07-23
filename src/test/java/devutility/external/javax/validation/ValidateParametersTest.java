@@ -1,5 +1,7 @@
 package devutility.external.javax.validation;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import devutility.external.javax.validation.model.TestController;
@@ -16,10 +18,10 @@ public class ValidateParametersTest extends BaseTest {
 		User user = new User();
 		user.setCellphone("asd");
 
-		Object[] parameters = { "ip.asd", user };
+		Object[] parameters = { "ip.asd", user, Arrays.asList(user) };
 
 		try {
-			ValidationResult result = ValidationUtils.validateParameters(target, target.getClass().getDeclaredMethod("test", String.class, User.class), parameters);
+			ValidationResult result = ValidationUtils.validateParameters(target, target.getClass().getDeclaredMethod("test", String.class, User.class, List.class), parameters);
 			Map<String, String> errorMap = result.getErrorMessages();
 
 			for (Map.Entry<String, String> entry : errorMap.entrySet()) {
